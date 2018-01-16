@@ -1,0 +1,38 @@
+1、使用docker拉取redis镜像
+	docker pull redis
+	
+2、准备配置文件
+mkdir -p /home/docker/redis/  
+wget https://raw.githubusercontent.com/antirez/redis/3.0/redis.conf -O /home/docker/redis/redis.conf
+cd /home/docker/redis/  
+sed -i 's/# slaveof <masterip> <masterport>/slaveof redis-master 6379/g' redis.conf  
+
+
+
+在redis中，完成主从复制，重点就是slaveof <masterip> <masterport>的设置
+
+
+
+3、启动redis容器
+docker run --name redis-master -p 6379:6379 -d redis
+docker run --link redis-master:redis-master -v /home/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave1 -p 6380:6379 -d redis redis-server /usr/local/etc/redis/redis.conf
+docker run --link redis-master:redis-master -v /home/docker/redis/redis.conf:/usr/local/etc/redis/redis.conf --name redis-slave2 -p 6381:6379 -d redis redis-server /usr/local/etc/redis/redis.conf
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

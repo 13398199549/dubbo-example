@@ -1,0 +1,54 @@
+1、在centos7上安装git客户端
+yum install git
+
+2、安装jdk1.8,将jdk-8u11-linux-x64.tar.gz解压到/usr/local/java目录下
+配置环境变量 vim /etc/profile，并重载该配置source /etc/profile
+
+
+JAVA_HOME="/usr/local/java/jdk1.8.0_11"
+JRE_HOME="/usr/local/java/jdk1.8.0_11/jre"
+CLASSPATH=$CLASSPATH:$JAVA_HOME/lib:$JAVA_HOME/jre/lib
+PATH=$JAVA_HOME/bin:$JAVA_HOME/jre/bin:$PATH
+export JAVA_HOME
+export JRE_HOME
+export CLASSPATH
+export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE INPUTRC
+
+
+
+完成之后，可以使用java -version查看下版本信息
+
+
+
+3、在centos7上安装maven
+在/usr/local/maven 下执行wget http://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+解压：tar -zxf apache-maven-3.3.9-bin.tar.gz 
+
+
+修改conf目录下的vim settings.xml
+<!-- 设置默认的本地仓库 -->
+<localRepository>/usr/local/maven/repository</localRepository>
+
+
+<!-- 设置国内的加速器 -->
+<mirror>
+      <id>alimaven</id>
+      <mirrorOf>central</mirrorOf>
+      <name>aliyun maven</name>
+      <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+    </mirror>
+
+	
+
+
+配置环境变量 vim /etc/profile，并重载该配置source /etc/profile
+
+M2_HOME=/usr/local/maven/apache-maven-3.3.9
+export PATH=${M2_HOME}/bin:${PATH}
+
+
+完成之后，可以使用mvn -version查看下版本信息
+
+
+
+

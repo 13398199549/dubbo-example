@@ -1,0 +1,49 @@
+1、使用Dockerfile构建一个tomcat的镜像出来
+在mnt/soft文件下，创建Dockerfile
+需要在该文件夹下准备2个文件：jdk-8u144-linux-i586.tar.gz   apache-tomcat-8.5.20.tar
+
+
+
+#pull down centos image
+FROM centos
+MAINTAINER 565599455@qq.com
+#copy jdk and tomcat into image
+ADD ./jdk-8u11-linux-x64.tar.gz /usr/local/java
+ADD ./apache-tomcat-8.5.20.tar.gz /usr/local/tomcat
+#set environment variable
+ENV JAVA_HOME /usr/local/java/jdk1.8.0_11
+ENV JRE_HOME $JAVA_HOME/jre  
+ENV CLASSPATH .:$JAVA_HOME/lib:$JRE_HOME/lib  
+ENV PATH $PATH:$JAVA_HOME/bin
+#define entry point which will be run first when the container starts up
+ENTRYPOINT /usr/local/tomcat/apache-tomcat-8.5.20/bin/startup.sh && tail -F /usr/local/tomcat/apache-tomcat-8.5.20/logs/catalina.out
+
+
+
+
+2、//在mnt/soft目录下，完成对Dockerfile文件编写之后，使用下列命令构建一个tomcat镜像出来
+docker build -t puxubo/tomcat:latest --rm=true .
+
+
+3、运行tomcat启动dubbo管理者，需要在dubbo-admin-2.5.4/WEB-INF/下面，将dubbo.properties的内容作如下修改：
+dubbo.registry.address=zookeeper://zookeeper_regiester:2181
+dubbo.admin.root.password=root
+dubbo.admin.guest.password=guest
+
+
+
+如果不是在docker环境下搭建一个管理界面，则配置文件中的zookeeper_regiester修改为zookeeper注册中心的IP地址
+
+
+//启动容器
+docker run -d -p 8080:8080 --name dubbo-admin --link zookeeper_regiester:zookeeper_regiester -v /root/dubbo-admin:/usr/local/tomcat/apache-tomcat-8.5.20/webapps puxubo/tomcat:latest
+
+
+4、开启端口
+firewall-cmd --zone=public --add-port=8080/tcp --permanent
+
+firewall-cmd --reload
+
+
+5、访问地址
+http://192.168.43.100:8080/dubbo-admin-2.5.4    root root

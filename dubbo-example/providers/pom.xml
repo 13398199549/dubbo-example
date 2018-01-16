@@ -1,0 +1,106 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+		<groupId>org.framestudy</groupId>
+		<artifactId>parents</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../parents</relativePath>
+	</parent>
+  
+  
+  
+  
+  <artifactId>providers</artifactId>
+  <packaging>war</packaging>
+  <name>providers</name>
+  <url>http://maven.apache.org</url>
+  <dependencies>
+    <!-- 以下是zookeeper 与 dubbo的依赖包 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>dubbo</artifactId>
+			<version>2.5.3</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.zookeeper</groupId>
+			<artifactId>zookeeper</artifactId>
+			<version>3.4.6</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>log4j</artifactId>
+					<groupId>log4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.sgroschupf</groupId>
+			<artifactId>zkclient</artifactId>
+			<version>0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.vesion}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.framestudy</groupId>
+			<artifactId>api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<!-- 以下是spring data jpa的依赖包 -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-jpa</artifactId>
+			<version>1.10.6.RELEASE</version>
+		</dependency>
+		<!-- 由于spring jpa与hibernate同根同源， 所以我们还需要导入hibernate核心包 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>4.2.4.Final</version>
+		</dependency>
+		<!-- 导入hibernate实体管理包 -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>4.2.4.Final</version>
+		</dependency>
+		<!-- 导入C3P0连接池包 -->
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.2.1</version>
+		</dependency>
+
+		<!-- 导入java连接mysql的连接包 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.8</version>
+		</dependency>
+
+		<!-- 导入切面植入的包 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>1.8.9</version>
+		</dependency>
+  </dependencies>
+  <build>
+    <finalName>providers</finalName>
+  </build>
+</project>

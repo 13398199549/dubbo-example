@@ -1,0 +1,13 @@
+1、拉取zookeeper镜像
+docker pull daocloud.io/daocloud/zookeeper:latest
+
+2、启动zookeeper容器
+docker run -d -p 2181:2181 --privileged  --name zookeeper_regiester -v /etc/soft/zoo.cfg:/usr/local/zookeeper/zookeeper-3.4.8/conf/zoo.cfg daocloud.io/daocloud/zookeeper:latest
+
+
+
+
+
+
+
+
