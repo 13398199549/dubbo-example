@@ -4,7 +4,7 @@ cd dubbo
 mvn clean install -Dmaven.test.skip
 
 2、从dubbo/dubbo-simple/dubbo-monitor-simple/target/中将dubbo-monitor-simple-2.5.5-assembly.tar.gz拷贝到/mnt/soft中
-再将jdk-8u11-linux-x64.tar.gz也拷贝到该目录下
+再将jdk-8u11-linux-x64.tar.gz也拷贝到该目录下,然后在linux系统中安装jdk1.8
 
 3、使用cp 命令将dubbo-monitor-simple-2.5.5-assembly.tar.gz 复制到/usr/local下，然后执行tar -zxvf dubbo-monitor-simple-2.5.5-assembly.tar.gz
 对文件进行解压
